@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://chsaqht6nnoba"]
+
+[ext_resource type="Texture2D" uid="uid://x03lh6s0xmh0" path="res://Sprites/Star.png" id="1_xachj"]
+[ext_resource type="Texture2D" uid="uid://c1jqgle2yqwil" path="res://Sprites/Void.png" id="2_2s31h"]
+[ext_resource type="Script" path="res://Scripts/Wanderer.gd" id="3_wpxu7"]
+[ext_resource type="PackedScene" uid="uid://x2c0v0rdiomg" path="res://Scenes/Confirm.tscn" id="4_yc21f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fubdq"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_xachj")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_u4iss"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.00706714, 0.339223, 0.632509, 1)
+colors = PackedColorArray(0.219503, 0.607365, 0.748674, 1, 0.8368, 0.861765, 0.770985, 0.964015, 0.911882, 0.637442, 0.250064, 0.932241, 1, 0.152941, 0.109804, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_de30l"]
+gradient = SubResource("Gradient_u4iss")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2jt1y"]
+emission_shape = 3
+emission_box_extents = Vector3(30, 10, 1)
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_de30l")
+
+[sub_resource type="QuadMesh" id="QuadMesh_oxq63"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nt4ck"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y0282"]
+
+[node name="Main" type="Node"]
+
+[node name="GpuParticles3d" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.23944)
+material_override = SubResource("StandardMaterial3D_fubdq")
+amount = 90
+explosiveness = 0.36
+process_material = SubResource("ParticleProcessMaterial_2jt1y")
+draw_pass_1 = SubResource("QuadMesh_oxq63")
+
+[node name="MainCamera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.5201)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.66555)
+script = ExtResource("3_wpxu7")
+confirm_scene = ExtResource("4_yc21f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("SphereShape3D_nt4ck")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CharacterBody3D"]
+
+[node name="Area3D" type="StaticBody3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 2.127, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_y0282")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Area3D"]
+
+[node name="Sprite3d" type="Sprite3D" parent="Area3D"]
+texture = ExtResource("2_2s31h")
