@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Node
 
 
 const SPEED = 5.0
@@ -11,6 +11,7 @@ var rayEnd = Vector3()
 @export var confirm_scene: PackedScene
 
 @onready var camera = get_node("%MainCamera")
+@onready var guide = get_node("%Guide")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -22,14 +23,13 @@ var rayEnd = Vector3()
 # 		var target_position = intersection.position
 # 		intersection.collider.add_child(target_spawn)
 
-func _process(delta):
-	var intersection = check_ray_hit()
-	print(intersection)
-	if not intersection.is_empty():
+#func _process(delta):
+	#var intersection = check_ray_hit()
+	#if not intersection.is_empty():
+		#guide.
 		# var target_position = intersection.position
-		var confirm = confirm_scene.instantiate()
-		intersection.collider.add_child(confirm)
-		print("hit")
+		# var confirm = confirm_scene.instantiate()
+		# intersection.collider.add(confirm)
 
 
 func check_ray_hit():

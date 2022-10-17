@@ -1,16 +1,15 @@
 [gd_scene load_steps=12 format=3 uid="uid://chsaqht6nnoba"]
 
-[ext_resource type="Texture2D" uid="uid://x03lh6s0xmh0" path="res://Sprites/Star.png" id="1_xachj"]
-[ext_resource type="Texture2D" uid="uid://c1jqgle2yqwil" path="res://Sprites/Void.png" id="2_2s31h"]
-[ext_resource type="Script" path="res://Scripts/Wanderer.gd" id="3_wpxu7"]
-[ext_resource type="PackedScene" uid="uid://x2c0v0rdiomg" path="res://Scenes/Confirm.tscn" id="4_yc21f"]
+[ext_resource type="Texture2D" uid="uid://x03lh6s0xmh0" path="res://Sprites/Star.png" id="2_8i3nl"]
+[ext_resource type="Texture2D" uid="uid://c1jqgle2yqwil" path="res://Sprites/Void.png" id="3_qhgy0"]
+[ext_resource type="Script" path="res://Scripts/Guide.gd" id="4_1vlwq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fubdq"]
 transparency = 1
 blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_xachj")
+albedo_texture = ExtResource("2_8i3nl")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -36,7 +35,12 @@ color_ramp = SubResource("GradientTexture1D_de30l")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y0282"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_gbe4t"]
+
 [node name="Main" type="Node"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.39724, 15.5033)
 
 [node name="GpuParticles3d" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.23944)
@@ -50,23 +54,51 @@ draw_pass_1 = SubResource("QuadMesh_oxq63")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.5201)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.66555)
-script = ExtResource("3_wpxu7")
-confirm_scene = ExtResource("4_yc21f")
+[node name="Wanderer" type="RigidBody3D" parent="."]
+axis_lock_linear_z = true
+can_sleep = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wanderer"]
 shape = SubResource("SphereShape3D_nt4ck")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CharacterBody3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Wanderer"]
 
 [node name="Area3D" type="StaticBody3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 2.127, 0, 0, 0)
+transform = Transform3D(1e+07, 0, 0, 0, 1e+07, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_y0282")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Area3D"]
-
 [node name="Sprite3d" type="Sprite3D" parent="Area3D"]
-texture = ExtResource("2_2s31h")
+visible = false
+texture = ExtResource("3_qhgy0")
+
+[node name="Guide" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 16.383
+script = ExtResource("4_1vlwq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Guide"]
+shape = SubResource("SphereShape3D_gbe4t")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Guide"]
+visible = false
+
+[node name="Guide2" type="Area3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -14.6895, 0, 1.20033)
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 32.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Guide2"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("SphereShape3D_gbe4t")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Guide2"]
