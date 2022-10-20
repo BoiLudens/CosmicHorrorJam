@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://12m6vn83dec6"]
+
+[ext_resource type="Script" path="res://Scripts/Guide.gd" id="1_q1jki"]
+[ext_resource type="Texture2D" uid="uid://dsaa48bn82kq" path="res://Sprites/Ring.png" id="2_27eqi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gbe4t"]
+
+[node name="Guide" type="Area3D"]
+unique_name_in_owner = true
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 16.383
+script = ExtResource("1_q1jki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_gbe4t")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3.013, 0, 0, 0, 3.013, 0, 0, 0, 3.013, 0, 0, 0)
+billboard = 1
+texture = ExtResource("2_27eqi")

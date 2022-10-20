@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://rj1ofbj0cp3e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nt4ck"]
+
+[node name="Wanderer" type="RigidBody3D"]
+axis_lock_linear_z = true
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nt4ck")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
