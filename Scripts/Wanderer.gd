@@ -4,5 +4,5 @@ func _process(delta):
 	var colliders = get_colliding_bodies()
 	if !colliders.is_empty():
 		for collider in colliders:
-			if collider.name == "Planet Static Body":
-				collider.helloWorld()
+			if collider.is_in_group("Planetoids"):
+				collider.promptConvo()

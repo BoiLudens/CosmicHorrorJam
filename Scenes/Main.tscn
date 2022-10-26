@@ -1,11 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://chsaqht6nnoba"]
+[gd_scene load_steps=20 format=3 uid="uid://chsaqht6nnoba"]
 
 [ext_resource type="Texture2D" uid="uid://x03lh6s0xmh0" path="res://Sprites/Star.png" id="2_8i3nl"]
 [ext_resource type="PackedScene" uid="uid://rj1ofbj0cp3e" path="res://Prefabs/wanderer.tscn" id="2_463d3"]
+[ext_resource type="PackedScene" uid="uid://73jm5qjy52vq" path="res://addons/dialogue_manager/example_balloon/example_balloon.tscn" id="2_ynv5b"]
+[ext_resource type="PackedScene" uid="uid://b361p61jmf257" path="res://addons/dialogue_manager/example_balloon/small_example_balloon.tscn" id="3_e3usa"]
 [ext_resource type="Texture2D" uid="uid://c1jqgle2yqwil" path="res://Sprites/Void.png" id="3_qhgy0"]
+[ext_resource type="Resource" uid="uid://fjgpj1b8sxky" path="res://Dialogue/Bob.dialogue" id="4_4vfiu"]
 [ext_resource type="Script" path="res://Scripts/Wanderer.gd" id="4_cywdg"]
 [ext_resource type="PackedScene" uid="uid://12m6vn83dec6" path="res://Prefabs/guide.tscn" id="4_mp784"]
 [ext_resource type="Script" path="res://Scripts/Planet.gd" id="5_y46ar"]
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="7_fp35l"]
+[ext_resource type="Resource" uid="uid://1f0c8pryyybd" path="res://Dialogue/Mark.dialogue" id="7_h6p5m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y0282"]
 
@@ -81,22 +86,51 @@ script = ExtResource("4_cywdg")
 
 [node name="Guide" parent="." instance=ExtResource("4_mp784")]
 
-[node name="Planet Static Body" type="StaticBody3D" parent="."]
+[node name="Bob" type="StaticBody3D" parent="." groups=["Planetoids"]]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.30653, 0, 0)
 script = ExtResource("5_y46ar")
+resource = ExtResource("4_4vfiu")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet Static Body"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bob"]
 shape = SubResource("SphereShape3D_klqqx")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Planet Static Body"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Bob"]
 
-[node name="Gravity Area" type="Area3D" parent="Planet Static Body"]
+[node name="Gravity Area" type="Area3D" parent="Bob"]
 gravity_space_override = 1
 gravity_point = true
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
-gravity = 32.0
+gravity = 10.492
 
-[node name="Gravity Area" type="CollisionShape3D" parent="Planet Static Body/Gravity Area"]
+[node name="Gravity Area" type="CollisionShape3D" parent="Bob/Gravity Area"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("SphereShape3D_gbe4t")
+
+[node name="Mark" type="StaticBody3D" parent="." groups=["Planetoids"]]
+transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 28.2766, 0, 0)
+script = ExtResource("5_y46ar")
+resource = ExtResource("7_h6p5m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mark"]
+shape = SubResource("SphereShape3D_klqqx")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Mark"]
+
+[node name="Gravity Area" type="Area3D" parent="Mark"]
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 10.0
+
+[node name="Gravity Area" type="CollisionShape3D" parent="Mark/Gravity Area"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("SphereShape3D_gbe4t")
+
+[node name="DialogueManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_fp35l")
+Balloon = ExtResource("2_ynv5b")
+SmallBalloon = ExtResource("3_e3usa")
+dialogue_resource = ExtResource("4_4vfiu")

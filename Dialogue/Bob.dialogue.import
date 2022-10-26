@@ -1,0 +1,14 @@
+[remap]
+
+importer="dialogue_manager_compiler_3"
+type="Resource"
+uid="uid://fjgpj1b8sxky"
+path="res://.godot/imported/Bob.dialogue-009c9b7199aca2b3976778186358c318.tres"
+
+[deps]
+
+source_file="res://Dialogue/Bob.dialogue"
+dest_files=["res://.godot/imported/Bob.dialogue-009c9b7199aca2b3976778186358c318.tres"]
+
+[params]
+

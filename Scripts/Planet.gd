@@ -1,13 +1,11 @@
 extends Node3D
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var canTalk: bool = true
+@export var resource: Resource
+@onready var dialogue_manager = get_node("%DialogueManager")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func helloWorld():
-	print("hi there")
+func promptConvo():
+	if (canTalk == true):
+		canTalk = false
+		dialogue_manager.dialogue_resource = resource
+		dialogue_manager.show_dialogue("start")

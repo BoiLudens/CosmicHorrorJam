@@ -1,0 +1,14 @@
+[remap]
+
+importer="dialogue_manager_compiler_3"
+type="Resource"
+uid="uid://1f0c8pryyybd"
+path="res://.godot/imported/Mark.dialogue-6c0ce576b42c34c10a9954f0c04bed5d.tres"
+
+[deps]
+
+source_file="res://Dialogue/Mark.dialogue"
+dest_files=["res://.godot/imported/Mark.dialogue-6c0ce576b42c34c10a9954f0c04bed5d.tres"]
+
+[params]
+
