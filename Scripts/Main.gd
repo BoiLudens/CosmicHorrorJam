@@ -4,11 +4,13 @@ extends Node
 @export var SmallBalloon: PackedScene
 @export var title: String = "start"
 @export var dialogue_resource: Resource
+
+var start_time = Time.get_ticks_msec()
+var runtime_sec: float 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	await get_tree().create_timer(0.4)
 	DialogueManager.dialogue_finished.connect(_on_dialogue_finished)
-#	show_dialogue(title)
 
 func show_dialogue(key: String) -> void:
 	var is_small_window: bool = ProjectSettings.get_setting("display/window/size/viewport_width") < 400
@@ -18,8 +20,10 @@ func show_dialogue(key: String) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
+	runtime_sec = float(Time.get_ticks_msec() - start_time)/1000
+	#print("Elapsed time: ", runtime_sec)
+	#print(int(runtime_sec/60))
+	
 
 func _on_dialogue_finished():
 	await get_tree().create_timer(0.4)

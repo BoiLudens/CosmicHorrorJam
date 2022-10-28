@@ -1,0 +1,14 @@
+[remap]
+
+importer="dialogue_manager_compiler_3"
+type="Resource"
+uid="uid://fjgpj1b8sxky"
+path="res://.godot/imported/M_1 Star.dialogue-4c2e1dcb94c6d3890f570076f8c1763a.tres"
+
+[deps]
+
+source_file="res://Dialogue/M_1 Star.dialogue"
+dest_files=["res://.godot/imported/M_1 Star.dialogue-4c2e1dcb94c6d3890f570076f8c1763a.tres"]
+
+[params]
+
